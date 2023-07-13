@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/rausa/Software/lib/CGNSMod/tools/main.cpp
+stdio.h
+-
+cgnslib.h
+/home/rausa/Software/lib/CGNSMod/tools/cgnslib.h
+
+libs/CGNS/build/include/cgnslib.h
+cgnstypes.h
+libs/CGNS/build/include/cgnstypes.h
+
+libs/CGNS/build/include/cgnstypes.h
+

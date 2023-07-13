@@ -1,0 +1,4 @@
+/home/rausa/Software/lib/CGNSMod/CMakeFiles/rebuild_cache.dir
+/home/rausa/Software/lib/CGNSMod/CMakeFiles/main.dir
+/home/rausa/Software/lib/CGNSMod/CMakeFiles/edit_cache.dir
+/home/rausa/Software/lib/CGNSMod/CMakeFiles/CGNSMod.dir

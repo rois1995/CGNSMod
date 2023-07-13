@@ -1,0 +1,2 @@
+/usr/bin/ar qc bin/libCGNSMod.a  CMakeFiles/CGNSMod.dir/src/cose.cpp.o
+/usr/bin/ranlib bin/libCGNSMod.a
