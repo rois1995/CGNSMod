@@ -1,5 +1,6 @@
 ./bin/*
 ./libs/*
+./Meshes/*
 
 CMakeCache.txt
 CMakeFiles/
