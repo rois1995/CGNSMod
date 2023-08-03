@@ -13,8 +13,9 @@ message("* Current build type is : ${CMAKE_BUILD_TYPE}")
 
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mtune=native -funroll-loops")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mtune=native -funroll-loops -ldl")
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Og -fsanitize=address -Wall -Wextra -pedantic -ldl")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Og -Wall -Wextra -pedantic -ldl -rdynamic")
 
 # -------------------------------------------------------------------------------------- Setup paths
 set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -37,15 +38,22 @@ include_directories(
         include/
 		src
 		${LIB_DIR}/CGNS/build/include
+		${LIB_DIR}/CGNS/build/src
+		${LIB_DIR}/CGNS/src
+		${LIB_DIR}/hdf5/include
+		${LIB_DIR}/hdf5/src
 
 )
 # -----------------------------------------------------------------------------------------
 link_directories(
 		${LIB_DIR}/CGNS/build/bin/
 		${LIB_DIR}/CGNS/build/lib/
+		${LIB_DIR}/hdf5/bin/
+		${LIB_DIR}/hdf5/lib/
 )
 
-set(LIBS libcgns.a )
+
+set(LIBS libcgns.a libhdf5.a libz.so)
 
 
 
@@ -89,7 +97,7 @@ foreach( sourcefile ${TOOLS} )
 		set(file ${PROJECT_NAME}-bin)
 	endif()
 	add_executable( ${file} ${sourcefile} )
-	target_link_libraries(${file} ${PROJECT_NAME} ${LIBS} ${MPI_CXX_LIBRARIES} OpenMP::OpenMP_CXX ${LIBS})
+	target_link_libraries(${file} ${PROJECT_NAME} ${LIBS} ${MPI_CXX_LIBRARIES} OpenMP::OpenMP_CXX ${LIBS} ${CMAKE_DL_LIBS})
 
 	if(MPI_COMPILE_FLAGS)
 		set_target_properties(${file} PROPERTIES COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
@@ -102,5 +110,6 @@ endforeach( sourcefile ${TOOLS} )
 
 #set_target_properties(${PROJECT_NAME}-bin
 #		PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+
 
 

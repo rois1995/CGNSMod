@@ -1,0 +1,155 @@
+numero di basi: 1
+numero di zone: 2
+
+Reading zone 1 data...
+   This zone has 2 boundary conditions
+it is a point range...    bc name is Altro and it has 1467 elements, from 7517 to 8983
+it is a point range...    bc name is Side and it has 165 elements, from 8984 to 9148
+
+Reading zone 2 data...
+   This zone has 2 boundary conditions
+it is a point range...    bc name is Altro_2 and it has 1582 elements, from 6920 to 8501
+it is a point range...    bc name is Side and it has 165 elements, from 8502 to 8666
+Side 2 2
+Zone 1 and zone 2 have in common the boundary: Side
+
+
+Reading zone 1 data...
+
+zone 1, named , has 1809 nodes and 7516 elements 
+
+number of sections=6
+New elements size 274
+
+Reading section data...
+   section 1 is called PyramidElements
+   section type = PYRA_5
+   N elements = 274
+   istart,iend = 7243, 7516
+   nboundary = 0
+PyramidElements
+Saving elements for section 1...
+New elements size 7516
+
+Reading section data...
+   section 2 is called TetElements
+   section type = TETRA_4
+   N elements = 7242
+   istart,iend = 1, 7242
+   nboundary = 0
+TetElements
+Saving elements for section 2...
+New elements size 7641
+
+Reading section data...
+   section 3 is called quad_Altro
+   section type = QUAD_4
+   N elements = 125
+   istart,iend = 8859, 8983
+   nboundary = 0
+quad_Altro
+Saving elements for section 3...
+New elements size 8983
+
+Reading section data...
+   section 4 is called tri_Altro
+   section type = TRI_3
+   N elements = 1342
+   istart,iend = 7517, 8858
+   nboundary = 0
+tri_Altro
+Saving elements for section 4...
+New elements size 8999
+
+Reading section data...
+   section 5 is called tri_Side
+   section type = TRI_3
+   N elements = 16
+   istart,iend = 8984, 8999
+   nboundary = 0
+tri_Side
+Saving elements for section 5...
+New elements size 9148
+
+Reading section data...
+   section 6 is called quad_Side
+   section type = QUAD_4
+   N elements = 149
+   istart,iend = 9000, 9148
+   nboundary = 0
+quad_Side
+Saving elements for section 6...
+
+Reading zone 2 data...
+
+zone 2, named , has 1680 nodes and 6919 elements 
+
+number of sections=5
+New elements size 9297
+
+Reading section data...
+   section 1 is called PyramidElements
+   section type = PYRA_5
+   N elements = 149
+   istart,iend = 6771, 6919
+   nboundary = 0
+PyramidElements
+Saving elements for section 1...
+New elements size 16067
+
+Reading section data...
+   section 2 is called TetElements
+   section type = TETRA_4
+   N elements = 6770
+   istart,iend = 1, 6770
+   nboundary = 0
+TetElements
+Saving elements for section 2...
+New elements size 17649
+
+Reading section data...
+   section 3 is called Altro_2
+   section type = TRI_3
+   N elements = 1582
+   istart,iend = 6920, 8501
+   nboundary = 0
+Altro_2
+Saving elements for section 3...
+New elements size 17665
+
+Reading section data...
+   section 4 is called tri_Side
+   section type = TRI_3
+   N elements = 16
+   istart,iend = 8502, 8517
+   nboundary = 0
+tri_Side
+Saving elements for section 4...
+New elements size 17814
+
+Reading section data...
+   section 5 is called quad_Side
+   section type = QUAD_4
+   N elements = 149
+   istart,iend = 8518, 8666
+   nboundary = 0
+quad_Side
+Saving elements for section 5...
+Done... 
+Original number of elements 17814
+New number of elements 17484
+0
+Total number of points was 3489
+Non-duplicated number of nodes is 3298
+/home/rausa/Software/lib/CGNSMod/Meshes/provaTria_ConQuads_SingleZone.cgns
+Total number of elements divided by type:
+Tria elements = 2924
+Quad elements = 125
+Tetra elements = 14012
+Pyramid elements = 423
+Penta elements = 0
+Hexa elements = 0
+Trias go from 1 to 2925
+Quads go from 2926 to 3051
+Tetra go from 3052 to 17064
+Pyra go from 17065 to 17488

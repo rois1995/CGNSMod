@@ -13,6 +13,10 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "include"
   "src"
   "libs/CGNS/build/include"
+  "libs/CGNS/build/src"
+  "libs/CGNS/src"
+  "libs/hdf5/include"
+  "libs/hdf5/src"
   "/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi"
   "/usr/lib/x86_64-linux-gnu/openmpi/include"
   )

@@ -7,10 +7,34 @@
 #IncludeRegexTransform: 
 
 /home/rausa/Software/lib/CGNSMod/tools/main.cpp
+functions.h
+/home/rausa/Software/lib/CGNSMod/tools/functions.h
+
+include/functions.h
 stdio.h
 -
+vector
+-
+numeric
+-
+algorithm
+-
+string
+-
+unordered_set
+-
+unordered_map
+-
 cgnslib.h
-/home/rausa/Software/lib/CGNSMod/tools/cgnslib.h
+include/cgnslib.h
+iostream
+-
+execinfo.h
+-
+cstdlib
+-
+unistd.h
+-
 
 libs/CGNS/build/include/cgnslib.h
 cgnstypes.h

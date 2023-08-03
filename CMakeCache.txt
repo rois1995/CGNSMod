@@ -456,11 +456,11 @@ FIND_PACKAGE_MESSAGE_DETAILS_MPI_C:INTERNAL=[/usr/lib/x86_64-linux-gnu/openmpi/l
 //Details about finding MPI_CXX
 FIND_PACKAGE_MESSAGE_DETAILS_MPI_CXX:INTERNAL=[/usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi_cxx.so][/usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi.so][mpi_cxx;mpi][/usr/lib/x86_64-linux-gnu/openmpi/include][TRUE][v3.1()]
 //Details about finding OpenMP
-FIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][TRUE][c ][v4.5()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][TRUE][c ][v()]
 //Details about finding OpenMP_C
-FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_C:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.so][v4.5()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_C:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.so][v()]
 //Details about finding OpenMP_CXX
-FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.so][v4.5()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.so][v()]
 //ADVANCED property for variable: MPIEXEC_EXECUTABLE
 MPIEXEC_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: MPIEXEC_MAX_NUMPROCS
