@@ -1,0 +1,2 @@
+Fix node errors when using cgnscheck
+make it possible to use it with selected CGNS versions (it should be into the CMake as variable, resulting in different folders for libs and include)

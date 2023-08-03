@@ -107,6 +107,7 @@ int main (int args, char **input){
         // Now check for boundary conditions with the same name across two zones
         bool isThereACommonBoundary = false;
         vector<pair<string, pair<int, int>>> CommonBoundaries;
+        vector<string> CommonBoundariesOnly;
         vector<pair<int, int>> AbuttingZones;
         std::unordered_set<Element> Elements2Remove;
         int NElements2Remove = 1;
@@ -125,6 +126,7 @@ int main (int args, char **input){
                         
                         AbuttingZones.push_back(make_pair(index_zone, index_zone_2));
                         CommonBoundaries.push_back(make_pair(BCNames[index_zone_2-1][index_bc-1], make_pair(std::distance(ThisBoundaries.begin(), it)+1, index_bc)));
+                        CommonBoundariesOnly.push_back(BCNames[index_zone_2-1][index_bc-1]);
                         cout << CommonBoundaries[CommonBoundaries.size()-1].first << " " << CommonBoundaries[CommonBoundaries.size()-1].second.first <<  " " << CommonBoundaries[CommonBoundaries.size()-1].second.second << endl;
                         isThereACommonBoundary= true;
 
@@ -160,7 +162,23 @@ int main (int args, char **input){
                 cout << CommonBoundaries[i].first << endl;
             }
             cout << endl;
+        }
 
+        // Now extract the boundaries that will be kept
+        vector<string> boundaries2Keep;
+        if (isThereACommonBoundary) {
+            cout << "Boundaries that will be kept are: " << endl;
+            for (index_zone = 1; index_zone <= nzones; index_zone++) {
+                vector<string> ThisBoundaries = BCNames[index_zone-1];
+                for (int i = 0; i < ThisBoundaries.size(); i++){
+                    auto it = find(CommonBoundariesOnly.begin(), CommonBoundariesOnly.end(), ThisBoundaries[i]);
+                    if( it == CommonBoundariesOnly.end()){
+                        boundaries2Keep.push_back(ThisBoundaries[i]);
+                        cout << ThisBoundaries[i] << " from zone " << index_zone << endl;
+                    }
+                }
+
+            }
 
         }
 
@@ -234,7 +252,7 @@ int main (int args, char **input){
         cgsize_t TotalSizes[3];
         TotalSizes[0] = uniquePointsVec.size();
         TotalSizes[1] = NewUniqueElements.size();
-        TotalSizes[2] = 0;
+        TotalSizes[2] = boundaries2Keep.size();
         int one;
         cg_base_write(index_file, "mesh", 3, 3, &one);
         cg_zone_write(index_file, 1, "Zone 1", TotalSizes, Unstructured, &one);

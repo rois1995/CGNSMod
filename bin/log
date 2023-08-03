@@ -13,6 +13,9 @@ it is a point range...    bc name is Side and it has 165 elements, from 8502 to 
 Side 2 2
 Zone 1 and zone 2 have in common the boundary: Side
 
+Boundaries that will be kept are: 
+Altro from zone 1
+Altro_2 from zone 2
 
 Reading zone 1 data...
 
