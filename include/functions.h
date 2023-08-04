@@ -11,6 +11,7 @@
 #include <execinfo.h>
 #include <cstdlib>
 #include <unistd.h>  // Added this include for STDERR_FILENO
+#include <map>
 
 using namespace std;
 
@@ -84,6 +85,8 @@ struct Element{
 
     bool volumeElem;
 
+    cgsize_t actualElementNumber = 0; // it starts from 0
+
 
     public:
     vector<cgsize_t> indexPoints;
@@ -105,6 +108,7 @@ struct Element{
             volumeElem = other.volumeElem;
             indexPoints.resize(other.indexPoints.size());
             indexPoints = other.indexPoints;
+            actualElementNumber = other.actualElementNumber;
         }
         // by convention, always return *this
         return *this;
@@ -131,7 +135,88 @@ struct Element{
         return ( zoneIndex == other.zoneIndex && localLocalIndex == other.localLocalIndex);
     }
 
+    static bool sortFun(const Element& other, const Element& other2) {
+        
+        // function to sort the element vectort should return if other < other2
+        // cout << "Comparing " << other.type << " and " << other2.type << endl;
+        switch (other.type) {
+            case TRI_3: 
+                return other.totalIndex < other2.totalIndex;
+            case QUAD_4:
+                switch (other2.type) {
+                    case TRI_3: 
+                        return false;
+                    case QUAD_4:
+                        return other.totalIndex < other2.totalIndex;
+                    case TETRA_4:
+                    case PYRA_5: 
+                    case PENTA_6:
+                    case HEXA_8:
+                        return true;
+                    default: 
+                        cout << "Something is wrong, the data type " << ElementTypeName[other2.type] << " is not taken into account for in the comparing function!" << endl;
+                        return false;
+                };
+            case TETRA_4:
+                switch (other2.type) {
+                    case TRI_3: 
+                    case QUAD_4:
+                        return false;
+                    case TETRA_4:
+                        return other.totalIndex < other2.totalIndex;
+                    case PYRA_5: 
+                    case PENTA_6:
+                    case HEXA_8:
+                        return true;
+                    default: 
+                        cout << "Something is wrong, the data type " << ElementTypeName[other2.type] << " is not taken into account for in the comparing function!" << endl;
+                        return false;
+                };
+            case PYRA_5: 
+                switch (other2.type) {
+                    case TRI_3: 
+                    case QUAD_4:
+                    case TETRA_4:
+                        return false;
+                    case PYRA_5: 
+                        return other.totalIndex < other2.totalIndex;
+                    case PENTA_6:
+                    case HEXA_8:
+                        return true;
+                    default: 
+                        cout << "Something is wrong, the data type " << ElementTypeName[other2.type] << " is not taken into account for in the comparing function!" << endl;
+                        return false;
+                };
+            case PENTA_6: 
+                switch (other2.type) {
+                    case TRI_3: 
+                    case QUAD_4:
+                    case TETRA_4:
+                    case PYRA_5: 
+                        return false;
+                    case PENTA_6:
+                        return other.totalIndex < other2.totalIndex;
+                    case HEXA_8:
+                        return true;
+                    default: 
+                        cout << "Something is wrong, the data type " << ElementTypeName[other2.type] << " is not taken into account for in the comparing function!" << endl;
+                        return false;
+                };
+            case HEXA_8:
+                return other.totalIndex < other2.totalIndex;
+            default: 
+                cout << "Something is wrong, the data type " << ElementTypeName[other.type] << " is not taken into account for in the comparing function!" << endl;
+                return false;
+        }
+    }
+
+    void printType(){
+        cout << ElementTypeName[type] << endl;
+    }
+
 };
+
+
 
 namespace std {
     template <>
@@ -200,7 +285,7 @@ namespace std {
 // }
 
 
-int extractPointsAndElements(string filename, std::unordered_set<Point3D>& coordinates, vector<vector<long int>>& PointDict, std::unordered_set<Element>& Elements, std::unordered_set<Point3DExt>& DummyMapPoints) {
+int extractPointsAndElements(string filename, std::unordered_set<Point3D>& coordinates, vector<vector<long int>>& PointDict, std::map<pair<int, cgsize_t>, Element>& Elements, std::unordered_set<Point3DExt>& DummyMapPoints) {
 
     int nzones;
     int index_file;
@@ -354,7 +439,7 @@ int extractPointsAndElements(string filename, std::unordered_set<Point3D>& coord
                     vector<cgsize_t> Points(first, last);
                     
                     Element ElementHere(Points, globaIndex, index_zone, index_sect, iElem+1, (int)eBeg+iElem, type);
-                    Elements.insert(ElementHere);
+                    Elements[{ElementHere.zoneIndex, ElementHere.localLocalIndex}] =  ElementHere;
                     globaIndex++;
                 }
                 
@@ -369,7 +454,7 @@ int extractPointsAndElements(string filename, std::unordered_set<Point3D>& coord
 }   
 
 
-void removeAbuttingElements(std::unordered_set<Element>& Elements2Remove, std::unordered_set<Element>& UniqueElements){
+void removeAbuttingElements(std::unordered_set<Element>& Elements2Remove, std::map<pair<int, cgsize_t>, Element>& UniqueElements){
 
     // Idea: Cycle on all the elements and remove those that belong to an overlapping boundary
 
@@ -385,7 +470,7 @@ void removeAbuttingElements(std::unordered_set<Element>& Elements2Remove, std::u
             // cout << " has type " << it->type << " and local local index ";
             // cout << it->localLocalIndex << endl;
 
-            auto foundIt = UniqueElements.find(*it);
+            auto foundIt = UniqueElements.find(make_pair(cose.zoneIndex, cose.localLocalIndex));
 
             // cout << "index = " << std::distance(Elements2Remove.begin(), foundIt) << " while total number is ";
             // cout << std::distance(Elements2Remove.begin(), Elements2Remove.end()) << endl;
@@ -409,13 +494,13 @@ void removeAbuttingElements(std::unordered_set<Element>& Elements2Remove, std::u
     cout << "New number of elements " << UniqueElements.size() << endl;
 
     // Now adjust the global index of the elements
-    std::unordered_set<Element> dummyUniqueElements;
+    std::map<pair<int, cgsize_t>, Element> dummyUniqueElements;
     int nNonDupElems = 0;
     auto itNow = UniqueElements.begin();
     while (itNow != UniqueElements.end()) {
         auto cose = *itNow;
-        cose.totalIndex = nNonDupElems;
-        dummyUniqueElements.insert(cose);
+        cose.second.totalIndex = nNonDupElems;
+        dummyUniqueElements[cose.first] = cose.second;
         ++itNow;
         nNonDupElems++;
     }
@@ -424,7 +509,7 @@ void removeAbuttingElements(std::unordered_set<Element>& Elements2Remove, std::u
 
 }
 
-void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vector<Point3D>& uniquePointsVec, std::unordered_set<Element>& UniqueElements, vector<Element>& NewUniqueElements){
+void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vector<Point3D>& uniquePointsVec, std::map<pair<int, cgsize_t>, Element>& UniqueElements, vector<Element>& NewUniqueElements){
 
     // I have to substitute the locally defined index of points to the global ones.
 
@@ -438,12 +523,13 @@ void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vecto
     cout << totalIndex << endl;
     while (it != UniqueElements.end()){
         
+        auto cose = it->second;
         // extract list of points
-        vector<cgsize_t> Points = it->indexPoints;
+        vector<cgsize_t> Points = cose.indexPoints;
 
         for(int i = 0; i < Points.size(); i++){
             // Define an accessory point
-            Point3DExt pointExtHere(it->zoneIndex, Points[i]);
+            Point3DExt pointExtHere(cose.zoneIndex, Points[i]);
             // PointHere.print();
 
             // Now search for this point among the map of whole points
@@ -477,7 +563,7 @@ void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vecto
         }
 
         // Now save the changes
-        Element dummyElement = *it;
+        Element dummyElement = cose;
         dummyElement.indexPoints = Points;
         NewUniqueElements[dummyElement.totalIndex] = dummyElement;
         // cout << totalIndex << endl;

@@ -21,8 +21,8 @@ int main (int args, char **input){
     char bcname[33];
     // string file2open = "/home/rausa/Software/lib/CGNSMod/Meshes/provaTMore.cgns";
     // string file2open = "/home/rausa/Software/lib/CGNSMod/Meshes/provaT.cgns";
-    string file2open = "/home/rausa/Software/lib/CGNSMod/Meshes/provaTria_ConQuads.cgns";
-    // string file2open = "/home/rausa/Software/lib/CGNSMod/Meshes/CoarseLoro.cgns";
+    // string file2open = "/home/rausa/Software/lib/CGNSMod/Meshes/provaTria_ConQuads.cgns";
+    string file2open = "/home/rausa/Software/lib/CGNSMod/Meshes/CoarseLoro.cgns";
 
 
 /* READ X, Y, Z GRID POINTS FROM CGNS FILE */
@@ -183,7 +183,7 @@ int main (int args, char **input){
         }
 
         std::unordered_set<Point3D> coordinates;
-        std::unordered_set<Element> Elements;
+        std::map<pair<int, cgsize_t>, Element> Elements;
 
         vector<vector<long int>> PointDict;
         std::unordered_set<Point3DExt> DummyMapPoints;
@@ -205,7 +205,7 @@ int main (int args, char **input){
         // }
 
         // Remove elements if they are from a duplicated boundary condition
-        std::unordered_set<Element> UniqueElements = Elements;
+        std::map<pair<int, cgsize_t>, Element> UniqueElements = Elements;
         // for(size_t i = 0; i < UniqueElements.size(); i++){
         //     cout << "Element " << UniqueElements[i].totalIndex << " belongs to zone " << UniqueElements[i].zoneIndex;
         //     cout << " has type " << UniqueElements[i].type << " and local local index ";
@@ -259,34 +259,84 @@ int main (int args, char **input){
         vector<vector<cgsize_t>> pentaElements(NewUniqueElements.size());
         vector<vector<cgsize_t>> hexaElements(NewUniqueElements.size());
 
+        // Sort the Element vector. Now I should have them sorted and easier to access.
+        // sort(NewUniqueElements.begin(), NewUniqueElements.end(), Element::sortFun);
+
         cgsize_t nTria, nQuad, nTetra, nPyra, nPenta, nHexa; 
         nTria = nQuad = nTetra = nPyra = nPenta = nHexa = 0;
 
-        for (Element elemHere: NewUniqueElements) {
-            switch (elemHere.type) {
+        for (cgsize_t i = 0; i < NewUniqueElements.size(); i++) {
+            switch (NewUniqueElements[i].type) {
                 case TRI_3: 
-                    triaElements[nTria++] = elemHere.indexPoints;
+                    triaElements[nTria] = NewUniqueElements[i].indexPoints;
+                    NewUniqueElements[i].actualElementNumber = nTria;
+                    nTria++;
                     break;
                 case QUAD_4:
-                    quadElements[nQuad++] = elemHere.indexPoints;
+                    quadElements[nQuad] = NewUniqueElements[i].indexPoints;
+                    NewUniqueElements[i].actualElementNumber = nQuad;
+                    nQuad++;
                     break;
                 case TETRA_4:
-                    tetraElements[nTetra++] = elemHere.indexPoints;
+                    tetraElements[nTetra] = NewUniqueElements[i].indexPoints;
+                    NewUniqueElements[i].actualElementNumber = nTetra;
+                    nTetra++;
                     break;
                 case PYRA_5: 
-                    pyraElements[nPyra++] = elemHere.indexPoints;
+                    pyraElements[nPyra] = NewUniqueElements[i].indexPoints;
+                    NewUniqueElements[i].actualElementNumber = nPyra;
+                    nPyra++;
                     break;
                 case PENTA_6:
-                    pentaElements[nPenta++] = elemHere.indexPoints;
+                    pentaElements[nPenta] = NewUniqueElements[i].indexPoints;
+                    NewUniqueElements[i].actualElementNumber = nPenta;
+                    nPenta++;
                     break;
                 case HEXA_8:
-                    hexaElements[nHexa++] = elemHere.indexPoints;
+                    hexaElements[nHexa] = NewUniqueElements[i].indexPoints;
+                    NewUniqueElements[i].actualElementNumber = nHexa;
+                    nHexa++;
                     break;
                 default: 
-                    printf("Elemento %s non riconosciuto. Exiting..", ElementTypeName[elemHere.type]);
+                    printf("Elemento %s non riconosciuto. Exiting..", ElementTypeName[NewUniqueElements[i].type]);
                     return 1;
             }
         }
+
+        // Now save the true actual index
+        // Even if starting from a not sorted, it should work just fine
+        for (cgsize_t i = 0; i < NewUniqueElements.size(); i++) {
+            switch (NewUniqueElements[i].type) {
+                case TRI_3: 
+                    // Trias are the first ones thus, it is good
+                    break;
+                case QUAD_4:
+                    NewUniqueElements[i].actualElementNumber = nTria+
+                                                               NewUniqueElements[i].actualElementNumber;
+                    break;
+                case TETRA_4:
+                    NewUniqueElements[i].actualElementNumber = nTria + nQuad +
+                                                               NewUniqueElements[i].actualElementNumber;
+                    break;
+                case PYRA_5: 
+                    NewUniqueElements[i].actualElementNumber = nTria + nQuad + nTetra + 
+                                                               NewUniqueElements[i].actualElementNumber;
+                    break;
+                case PENTA_6:
+                    NewUniqueElements[i].actualElementNumber = nTria + nQuad + nTetra + nPyra +
+                                                               NewUniqueElements[i].actualElementNumber;
+                    break;
+                case HEXA_8:
+                    NewUniqueElements[i].actualElementNumber = nTria + nQuad + nTetra + nPyra + nPenta +
+                                                               NewUniqueElements[i].actualElementNumber;
+                    break;
+                default: 
+                    printf("Elemento %s non riconosciuto. Exiting..", ElementTypeName[NewUniqueElements[i].type]);
+                    return 1;
+            }
+            // cout   << ElementTypeName[NewUniqueElements[i].type] << " has number " << NewUniqueElements[i].actualElementNumber +1 << endl;
+        }
+
 
         // Now resize to actual size
         triaElements.resize(nTria);
@@ -434,23 +484,52 @@ int main (int args, char **input){
             lastNofElements += nHexa;
         }
 
-        
-        // for ( auto i = 0; i < NewUniqueElements.size(); i++){
-        //     cout << NewUniqueElements[i].type << endl;
-        // }
-        // vector<cgsize_t> elements2Write;
-        // cgsize_t n = 0;
-        // for ( auto i = 0; i < NewUniqueElements.size(); i++){
-        //     for (cgsize_t j = 0; j < NewUniqueElements[i].indexPoints.size(); j++){
-        //         elements2Write[n++] = NewUniqueElements[i].indexPoints[j];
-        //     }
-        // }
 
-        // if (cg_elements_partial_write(index_file, 1, 1, 1, , elements2Write.data()) != CG_OK) {
-        //     std::cerr << "Failed to write the element connectivity." << std::endl;
-        //     cg_close(index_file);
-        //     return 1;
-        // }
+        // It is much faster if I use a map
+        std::map<pair<int, cgsize_t>, Element> elementMap;
+        for (cgsize_t iElem = 0; iElem < NewUniqueElements.size(); iElem++){
+            elementMap[{NewUniqueElements[iElem].zoneIndex, NewUniqueElements[iElem].localLocalIndex}] = NewUniqueElements[iElem];
+        }
+
+        // Now I should assign the correct boundary elements to the boundaries
+        if (isThereACommonBoundary) {
+            for (index_zone = 1; index_zone <= nzones; index_zone++) {
+                vector<string> ThisBoundaries = BCNames[index_zone-1];
+                for (int i = 0; i < ThisBoundaries.size(); i++){
+                    auto it = find(CommonBoundariesOnly.begin(), CommonBoundariesOnly.end(), ThisBoundaries[i]);
+                    if( it == CommonBoundariesOnly.end()){
+
+                        // I have to modify the elements of this boundary and also write to file
+                        vector<cgsize_t> elemHere = BCElements[index_zone-1][i];
+                    
+                        cout << "Writing boundary condition " << ThisBoundaries[i] << " with " << elemHere.size() << " elements" << endl;
+
+                        for (cgsize_t iElem = 0; iElem < elemHere.size(); iElem++)
+                        {
+                            cgsize_t toFind = elemHere[iElem];
+                            auto it = elementMap.find(make_pair(index_zone, toFind));
+
+                            if (it != elementMap.end()) {
+                                // It should always be found
+                                auto cose = it->second;
+                                elemHere[iElem] = cose.actualElementNumber+1;
+                            } else {
+                                std::cout << "Element not found\n";
+                            }
+                        }
+
+                        int index_bc;
+                        cg_boco_write(index_file, 1, 1, ThisBoundaries[i].c_str(), BCTypeUserDefined, ElementList, elemHere.size(), elemHere.data(), &index_bc);
+
+                        
+                    }
+                }
+
+            }
+
+        }
+
+
 
         cg_close(index_file);
 

@@ -1,158 +1,450 @@
 numero di basi: 1
-numero di zone: 2
+numero di zone: 4
 
 Reading zone 1 data...
-   This zone has 2 boundary conditions
-it is a point range...    bc name is Altro and it has 1467 elements, from 7517 to 8983
-it is a point range...    bc name is Side and it has 165 elements, from 8984 to 9148
+   This zone has 3 boundary conditions
+it is a point list...    bc name is Interface and it has 6105 elements, for sure between from 997394 to 1003498
+it is a point list...    bc name is Fernfeld2 and it has 9186 elements, for sure between from 1008863 to 1018048
+it is a point list...    bc name is Symmetrie_1_2 and it has 12921 elements, for sure between from 1003499 to 1016419
 
 Reading zone 2 data...
-   This zone has 2 boundary conditions
-it is a point range...    bc name is Altro_2 and it has 1582 elements, from 6920 to 8501
-it is a point range...    bc name is Side and it has 165 elements, from 8502 to 8666
-Side 2 2
-Zone 1 and zone 2 have in common the boundary: Side
+   This zone has 3 boundary conditions
+it is a point list...    bc name is Symmetrie_1_2 and it has 12921 elements, for sure between from 997394 to 1010314
+it is a point list...    bc name is Interface_3 and it has 6105 elements, for sure between from 1010315 to 1016419
+it is a point list...    bc name is Fernfeld2_4 and it has 9186 elements, for sure between from 1016420 to 1025605
+
+Reading zone 3 data...
+   This zone has 37 boundary conditions
+it is a point list...    bc name is Fluegel and it has 15603 elements, for sure between from 16962895 to 16978497
+it is a point list...    bc name is Leitwerk and it has 63061 elements, for sure between from 16970888 to 17033948
+it is a point list...    bc name is Nase and it has 761 elements, for sure between from 16970127 to 16970887
+it is a point list...    bc name is Ogive and it has 448 elements, for sure between from 16869163 to 16869610
+it is a point list...    bc name is Zylinder_Fluegel and it has 1092 elements, for sure between from 16899747 to 16900838
+it is a point list...    bc name is Zylinder_Heck and it has 598 elements, for sure between from 16969585 to 16970182
+it is a point list...    bc name is Heck and it has 189 elements, for sure between from 17033160 to 17033348
+it is a point list...    bc name is Zylinder and it has 704 elements, for sure between from 16892756 to 16893459
+it is a point list...    bc name is Interface and it has 6105 elements, for sure between from 17101393 to 17107497
+it is a point list...    bc name is Symmetrie_1_1 and it has 24998 elements, for sure between from 16869164 to 16894161
+it is a point list...    bc name is Zylinder_Fluegelanbindung and it has 4157 elements, for sure between from 17033202 to 17037358
+it is a point list...    bc name is Zylinder_Mitte and it has 290 elements, for sure between from 16893336 to 16893625
+it is a point list...    bc name is Zylinder_Leitwerk and it has 182 elements, for sure between from 16893196 to 16893377
+it is a point list...    bc name is Zylinder_LW_Anbindung and it has 1802 elements, for sure between from 17093616 to 17095417
+it is a point list...    bc name is Fluegel_dup1 and it has 15716 elements, for sure between from 17039183 to 17054898
+it is a point list...    bc name is Leitwerk_dup1 and it has 25142 elements, for sure between from 17046710 to 17071851
+it is a point list...    bc name is Nase_dup1 and it has 770 elements, for sure between from 17071852 to 17072621
+it is a point list...    bc name is Ogive_dup1 and it has 364 elements, for sure between from 16935923 to 16936286
+it is a point list...    bc name is Zylinder_Fluegel_dup1 and it has 810 elements, for sure between from 16936315 to 16937124
+it is a point list...    bc name is Zylinder_Heck_dup1 and it has 598 elements, for sure between from 17075629 to 17076226
+it is a point list...    bc name is Heck_dup1 and it has 189 elements, for sure between from 17076227 to 17076415
+it is a point list...    bc name is Zylinder_dup1 and it has 572 elements, for sure between from 16937204 to 16937775
+it is a point list...    bc name is Symmetrie_1_1_dup1 and it has 22853 elements, for sure between from 16935924 to 16958776
+it is a point list...    bc name is Zylinder_Fluegelanbindung_dup1 and it has 3937 elements, for sure between from 17072622 to 17076558
+it is a point list...    bc name is Zylinder_Mitte_dup1 and it has 256 elements, for sure between from 16937820 to 16938075
+it is a point list...    bc name is Zylinder_Leitwerk_dup1 and it has 143 elements, for sure between from 16938032 to 16938174
+it is a point list...    bc name is Zylinder_LW_Anbindung_dup1 and it has 1346 elements, for sure between from 17095418 to 17096763
+it is a point list...    bc name is Fluegelvorderkanten and it has 1282 elements, for sure between from 16868186 to 16869467
+it is a point list...    bc name is Fluegelschraegen and it has 6428 elements, for sure between from 16867780 to 16874207
+it is a point list...    bc name is Fluegelhinterkanten and it has 1746 elements, for sure between from 16867564 to 16869309
+it is a point list...    bc name is Fluegelvorderkanten_dup1 and it has 1282 elements, for sure between from 16903783 to 16905064
+it is a point list...    bc name is Fluegelschraegen_dup1 and it has 6400 elements, for sure between from 16903391 to 16909790
+it is a point list...    bc name is Fluegelhinterkanten_dup1 and it has 1728 elements, for sure between from 16903175 to 16904902
+it is a point list...    bc name is Leitwerkvorderkanten and it has 23391 elements, for sure between from 16869443 to 16892833
+it is a point list...    bc name is Leitwerkvorderkanten_dup1 and it has 23362 elements, for sure between from 16912581 to 16935942
+it is a point list...    bc name is Fluegel_Strukt and it has 1496 elements, for sure between from 16938183 to 16939678
+it is a point list...    bc name is Fluegel_Strukt_dup1 and it has 1870 elements, for sure between from 16939679 to 16941548
+
+Reading zone 4 data...
+   This zone has 37 boundary conditions
+it is a point list...    bc name is Symmetrie_1_1 and it has 24998 elements, for sure between from 16867564 to 16892561
+it is a point list...    bc name is Symmetrie_1_1_dup1 and it has 22853 elements, for sure between from 16867746 to 16890598
+it is a point list...    bc name is Fluegel_3 and it has 15603 elements, for sure between from 16989041 to 17004643
+it is a point list...    bc name is Leitwerk_3 and it has 63061 elements, for sure between from 16997406 to 17060466
+it is a point list...    bc name is Nase_3 and it has 761 elements, for sure between from 16996645 to 16997405
+it is a point list...    bc name is Ogive_3 and it has 448 elements, for sure between from 16890868 to 16891315
+it is a point list...    bc name is Zylinder_Fluegel_3 and it has 1092 elements, for sure between from 16921354 to 16922445
+it is a point list...    bc name is Zylinder_Heck_3 and it has 598 elements, for sure between from 16996103 to 16996700
+it is a point list...    bc name is Heck_3 and it has 189 elements, for sure between from 17059756 to 17059944
+it is a point list...    bc name is Zylinder_3 and it has 704 elements, for sure between from 16914433 to 16915136
+it is a point list...    bc name is Interface_3 and it has 6105 elements, for sure between from 17106860 to 17112964
+it is a point list...    bc name is Zylinder_Fluegelanbindung_3 and it has 4157 elements, for sure between from 17059798 to 17063954
+it is a point list...    bc name is Zylinder_Mitte_3 and it has 290 elements, for sure between from 16914955 to 16915244
+it is a point list...    bc name is Zylinder_Leitwerk_3 and it has 182 elements, for sure between from 16914829 to 16915010
+it is a point list...    bc name is Zylinder_LW_Anbindung_3 and it has 1802 elements, for sure between from 16995731 to 16997532
+it is a point list...    bc name is Fluegel_dup1_3 and it has 15716 elements, for sure between from 17067265 to 17082980
+it is a point list...    bc name is Leitwerk_dup1_3 and it has 25142 elements, for sure between from 17074796 to 17099937
+it is a point list...    bc name is Nase_dup1_3 and it has 770 elements, for sure between from 17099958 to 17100727
+it is a point list...    bc name is Ogive_dup1_3 and it has 364 elements, for sure between from 16957446 to 16957809
+it is a point list...    bc name is Zylinder_Fluegel_dup1_3 and it has 810 elements, for sure between from 16957810 to 16958619
+it is a point list...    bc name is Zylinder_Heck_dup1_3 and it has 598 elements, for sure between from 17103735 to 17104332
+it is a point list...    bc name is Heck_dup1_3 and it has 189 elements, for sure between from 17104333 to 17104521
+it is a point list...    bc name is Zylinder_dup1_3 and it has 572 elements, for sure between from 16958620 to 16959191
+it is a point list...    bc name is Zylinder_Fluegelanbindung_dup1_3 and it has 3937 elements, for sure between from 17100728 to 17104664
+it is a point list...    bc name is Zylinder_Mitte_dup1_3 and it has 256 elements, for sure between from 16959192 to 16959447
+it is a point list...    bc name is Zylinder_Leitwerk_dup1_3 and it has 143 elements, for sure between from 16959392 to 16959534
+it is a point list...    bc name is Zylinder_LW_Anbindung_dup1_3 and it has 1346 elements, for sure between from 17105514 to 17106859
+it is a point list...    bc name is Fluegelvorderkanten_3 and it has 1282 elements, for sure between from 16889891 to 16891172
+it is a point list...    bc name is Fluegelschraegen_3 and it has 6428 elements, for sure between from 16889485 to 16895912
+it is a point list...    bc name is Fluegelhinterkanten_3 and it has 1746 elements, for sure between from 16889269 to 16891014
+it is a point list...    bc name is Fluegelvorderkanten_dup1_3 and it has 1282 elements, for sure between from 16925306 to 16926587
+it is a point list...    bc name is Fluegelschraegen_dup1_3 and it has 6400 elements, for sure between from 16924914 to 16931313
+it is a point list...    bc name is Fluegelhinterkanten_dup1_3 and it has 1728 elements, for sure between from 16924698 to 16926425
+it is a point list...    bc name is Leitwerkvorderkanten_3 and it has 23391 elements, for sure between from 16891120 to 16914510
+it is a point list...    bc name is Leitwerkvorderkanten_dup1_3 and it has 23362 elements, for sure between from 16934104 to 16957465
+it is a point list...    bc name is Fluegel_Strukt_3 and it has 1496 elements, for sure between from 16959529 to 16961024
+it is a point list...    bc name is Fluegel_Strukt_dup1_3 and it has 1870 elements, for sure between from 16961025 to 16962894
+Symmetrie_1_2 3 1
+Interface 1 9
+Interface_3 2 11
+Symmetrie_1_1 10 1
+Symmetrie_1_1_dup1 23 2
+Zone 1 and zone 2 have in common the boundary: Symmetrie_1_2
+Zone 1 and zone 3 have in common the boundary: Interface
+Zone 2 and zone 4 have in common the boundary: Interface_3
+Zone 3 and zone 4 have in common the boundary: Symmetrie_1_1
+Zone 3 and zone 4 have in common the boundary: Symmetrie_1_1_dup1
 
 Boundaries that will be kept are: 
-Altro from zone 1
-Altro_2 from zone 2
+Fernfeld2 from zone 1
+Fernfeld2_4 from zone 2
+Fluegel from zone 3
+Leitwerk from zone 3
+Nase from zone 3
+Ogive from zone 3
+Zylinder_Fluegel from zone 3
+Zylinder_Heck from zone 3
+Heck from zone 3
+Zylinder from zone 3
+Zylinder_Fluegelanbindung from zone 3
+Zylinder_Mitte from zone 3
+Zylinder_Leitwerk from zone 3
+Zylinder_LW_Anbindung from zone 3
+Fluegel_dup1 from zone 3
+Leitwerk_dup1 from zone 3
+Nase_dup1 from zone 3
+Ogive_dup1 from zone 3
+Zylinder_Fluegel_dup1 from zone 3
+Zylinder_Heck_dup1 from zone 3
+Heck_dup1 from zone 3
+Zylinder_dup1 from zone 3
+Zylinder_Fluegelanbindung_dup1 from zone 3
+Zylinder_Mitte_dup1 from zone 3
+Zylinder_Leitwerk_dup1 from zone 3
+Zylinder_LW_Anbindung_dup1 from zone 3
+Fluegelvorderkanten from zone 3
+Fluegelschraegen from zone 3
+Fluegelhinterkanten from zone 3
+Fluegelvorderkanten_dup1 from zone 3
+Fluegelschraegen_dup1 from zone 3
+Fluegelhinterkanten_dup1 from zone 3
+Leitwerkvorderkanten from zone 3
+Leitwerkvorderkanten_dup1 from zone 3
+Fluegel_Strukt from zone 3
+Fluegel_Strukt_dup1 from zone 3
+Fluegel_3 from zone 4
+Leitwerk_3 from zone 4
+Nase_3 from zone 4
+Ogive_3 from zone 4
+Zylinder_Fluegel_3 from zone 4
+Zylinder_Heck_3 from zone 4
+Heck_3 from zone 4
+Zylinder_3 from zone 4
+Zylinder_Fluegelanbindung_3 from zone 4
+Zylinder_Mitte_3 from zone 4
+Zylinder_Leitwerk_3 from zone 4
+Zylinder_LW_Anbindung_3 from zone 4
+Fluegel_dup1_3 from zone 4
+Leitwerk_dup1_3 from zone 4
+Nase_dup1_3 from zone 4
+Ogive_dup1_3 from zone 4
+Zylinder_Fluegel_dup1_3 from zone 4
+Zylinder_Heck_dup1_3 from zone 4
+Heck_dup1_3 from zone 4
+Zylinder_dup1_3 from zone 4
+Zylinder_Fluegelanbindung_dup1_3 from zone 4
+Zylinder_Mitte_dup1_3 from zone 4
+Zylinder_Leitwerk_dup1_3 from zone 4
+Zylinder_LW_Anbindung_dup1_3 from zone 4
+Fluegelvorderkanten_3 from zone 4
+Fluegelschraegen_3 from zone 4
+Fluegelhinterkanten_3 from zone 4
+Fluegelvorderkanten_dup1_3 from zone 4
+Fluegelschraegen_dup1_3 from zone 4
+Fluegelhinterkanten_dup1_3 from zone 4
+Leitwerkvorderkanten_3 from zone 4
+Leitwerkvorderkanten_dup1_3 from zone 4
+Fluegel_Strukt_3 from zone 4
+Fluegel_Strukt_dup1_3 from zone 4
 
 Reading zone 1 data...
 
-zone 1, named , has 1809 nodes and 7516 elements 
+zone 1, named , has 177445 nodes and 997393 elements 
 
-number of sections=6
-New elements size 274
-
-Reading section data...
-   section 1 is called PyramidElements
-   section type = PYRA_5
-   N elements = 274
-   istart,iend = 7243, 7516
-   nboundary = 0
-PyramidElements
-Saving elements for section 1...
-New elements size 7516
+number of sections=2
+New elements size 997393
 
 Reading section data...
-   section 2 is called TetElements
+   section 1 is called Tetrahedra
    section type = TETRA_4
-   N elements = 7242
-   istart,iend = 1, 7242
+   N elements = 997393
+   istart,iend = 1, 997393
    nboundary = 0
-TetElements
+Tetrahedra
+Saving elements for section 1...
+New elements size 1025605
+
+Reading section data...
+   section 2 is called Triangles
+   section type = TRI_3
+   N elements = 28212
+   istart,iend = 997394, 1025605
+   nboundary = 0
+Triangles
 Saving elements for section 2...
-New elements size 7641
-
-Reading section data...
-   section 3 is called quad_Altro
-   section type = QUAD_4
-   N elements = 125
-   istart,iend = 8859, 8983
-   nboundary = 0
-quad_Altro
-Saving elements for section 3...
-New elements size 8983
-
-Reading section data...
-   section 4 is called tri_Altro
-   section type = TRI_3
-   N elements = 1342
-   istart,iend = 7517, 8858
-   nboundary = 0
-tri_Altro
-Saving elements for section 4...
-New elements size 8999
-
-Reading section data...
-   section 5 is called tri_Side
-   section type = TRI_3
-   N elements = 16
-   istart,iend = 8984, 8999
-   nboundary = 0
-tri_Side
-Saving elements for section 5...
-New elements size 9148
-
-Reading section data...
-   section 6 is called quad_Side
-   section type = QUAD_4
-   N elements = 149
-   istart,iend = 9000, 9148
-   nboundary = 0
-quad_Side
-Saving elements for section 6...
 
 Reading zone 2 data...
 
-zone 2, named , has 1680 nodes and 6919 elements 
+zone 2, named , has 177445 nodes and 997393 elements 
 
-number of sections=5
-New elements size 9297
-
-Reading section data...
-   section 1 is called PyramidElements
-   section type = PYRA_5
-   N elements = 149
-   istart,iend = 6771, 6919
-   nboundary = 0
-PyramidElements
-Saving elements for section 1...
-New elements size 16067
+number of sections=2
+New elements size 2022998
 
 Reading section data...
-   section 2 is called TetElements
+   section 1 is called Tetrahedra
    section type = TETRA_4
-   N elements = 6770
-   istart,iend = 1, 6770
+   N elements = 997393
+   istart,iend = 1, 997393
    nboundary = 0
-TetElements
+Tetrahedra
+Saving elements for section 1...
+New elements size 2051210
+
+Reading section data...
+   section 2 is called Triangles
+   section type = TRI_3
+   N elements = 28212
+   istart,iend = 997394, 1025605
+   nboundary = 0
+Triangles
 Saving elements for section 2...
-New elements size 17649
+
+Reading zone 3 data...
+
+zone 3, named , has 6751353 nodes and 16867563 elements 
+
+number of sections=6
+New elements size 4663463
 
 Reading section data...
-   section 3 is called Altro_2
-   section type = TRI_3
-   N elements = 1582
-   istart,iend = 6920, 8501
+   section 1 is called Hexahedra
+   section type = HEXA_8
+   N elements = 2612253
+   istart,iend = 1, 2612253
    nboundary = 0
-Altro_2
+Hexahedra
+Saving elements for section 1...
+New elements size 9222489
+
+Reading section data...
+   section 2 is called Pentahedra
+   section type = PENTA_6
+   N elements = 4559026
+   istart,iend = 2612254, 7171279
+   nboundary = 0
+Pentahedra
+Saving elements for section 2...
+New elements size 9921736
+
+Reading section data...
+   section 3 is called Pyramids
+   section type = PYRA_5
+   N elements = 699247
+   istart,iend = 7171280, 7870526
+   nboundary = 0
+Pyramids
 Saving elements for section 3...
-New elements size 17665
+New elements size 18918773
 
 Reading section data...
-   section 4 is called tri_Side
-   section type = TRI_3
-   N elements = 16
-   istart,iend = 8502, 8517
+   section 4 is called Tetrahedra
+   section type = TETRA_4
+   N elements = 8997037
+   istart,iend = 7870527, 16867563
    nboundary = 0
-tri_Side
+Tetrahedra
 Saving elements for section 4...
-New elements size 17814
+New elements size 19014104
 
 Reading section data...
-   section 5 is called quad_Side
+   section 5 is called Quadrilaterals
    section type = QUAD_4
-   N elements = 149
-   istart,iend = 8518, 8666
+   N elements = 95331
+   istart,iend = 16867564, 16962894
    nboundary = 0
-quad_Side
+Quadrilaterals
 Saving elements for section 5...
+New elements size 19180444
+
+Reading section data...
+   section 6 is called Triangles
+   section type = TRI_3
+   N elements = 166340
+   istart,iend = 16962895, 17129234
+   nboundary = 0
+Triangles
+Saving elements for section 6...
+
+Reading zone 4 data...
+
+zone 4, named , has 6751353 nodes and 16867563 elements 
+
+number of sections=6
+New elements size 21792697
+
+Reading section data...
+   section 1 is called Hexahedra
+   section type = HEXA_8
+   N elements = 2612253
+   istart,iend = 1, 2612253
+   nboundary = 0
+Hexahedra
+Saving elements for section 1...
+New elements size 26351723
+
+Reading section data...
+   section 2 is called Pentahedra
+   section type = PENTA_6
+   N elements = 4559026
+   istart,iend = 2612254, 7171279
+   nboundary = 0
+Pentahedra
+Saving elements for section 2...
+New elements size 27050970
+
+Reading section data...
+   section 3 is called Pyramids
+   section type = PYRA_5
+   N elements = 699247
+   istart,iend = 7171280, 7870526
+   nboundary = 0
+Pyramids
+Saving elements for section 3...
+New elements size 36048007
+
+Reading section data...
+   section 4 is called Tetrahedra
+   section type = TETRA_4
+   N elements = 8997037
+   istart,iend = 7870527, 16867563
+   nboundary = 0
+Tetrahedra
+Saving elements for section 4...
+New elements size 36143338
+
+Reading section data...
+   section 5 is called Quadrilaterals
+   section type = QUAD_4
+   N elements = 95331
+   istart,iend = 16867564, 16962894
+   nboundary = 0
+Quadrilaterals
+Saving elements for section 5...
+New elements size 36309678
+
+Reading section data...
+   section 6 is called Triangles
+   section type = TRI_3
+   N elements = 166340
+   istart,iend = 16962895, 17129234
+   nboundary = 0
+Triangles
+Saving elements for section 6...
 Done... 
-Original number of elements 17814
-New number of elements 17484
+Original number of elements 36309678
+New number of elements 36163714
 1
-Total number of points was 3489
-Non-duplicated number of nodes is 3298
-/home/rausa/Software/lib/CGNSMod/Meshes/provaTria_ConQuads_SingleZone.cgns
+Total number of points was 13857596
+Non-duplicated number of nodes is 13809842
+/home/rausa/Software/lib/CGNSMod/Meshes/CoarseLoro_SingleZone.cgns
 Total number of elements divided by type:
-Tria elements = 2924
-Quad elements = 125
-Tetra elements = 14012
-Pyramid elements = 423
-Penta elements = 0
-Hexa elements = 0
-Trias go from 1 to 2924
-Quads go from 2925 to 3049
-Tetra go from 3050 to 17061
-Pyra go from 17062 to 17484
+Tria elements = 286550
+Quad elements = 147252
+Tetra elements = 19988860
+Pyramid elements = 1398494
+Penta elements = 9118052
+Hexa elements = 5224506
+Trias go from 1 to 286550
+Quads go from 286551 to 433802
+Tetra go from 433803 to 20422662
+Pyra go from 20422663 to 21821156
+Penta go from 21821157 to 30939208
+Hexa go from 30939209 to 36163714
+Writing boundary condition Fernfeld2 with 9186 elements
+Writing boundary condition Fernfeld2_4 with 9186 elements
+Writing boundary condition Fluegel with 15603 elements
+Writing boundary condition Leitwerk with 63061 elements
+Writing boundary condition Nase with 761 elements
+Writing boundary condition Ogive with 448 elements
+Writing boundary condition Zylinder_Fluegel with 1092 elements
+Writing boundary condition Zylinder_Heck with 598 elements
+Writing boundary condition Heck with 189 elements
+Writing boundary condition Zylinder with 704 elements
+Writing boundary condition Zylinder_Fluegelanbindung with 4157 elements
+Writing boundary condition Zylinder_Mitte with 290 elements
+Writing boundary condition Zylinder_Leitwerk with 182 elements
+Writing boundary condition Zylinder_LW_Anbindung with 1802 elements
+Writing boundary condition Fluegel_dup1 with 15716 elements
+Writing boundary condition Leitwerk_dup1 with 25142 elements
+Writing boundary condition Nase_dup1 with 770 elements
+Writing boundary condition Ogive_dup1 with 364 elements
+Writing boundary condition Zylinder_Fluegel_dup1 with 810 elements
+Writing boundary condition Zylinder_Heck_dup1 with 598 elements
+Writing boundary condition Heck_dup1 with 189 elements
+Writing boundary condition Zylinder_dup1 with 572 elements
+Writing boundary condition Zylinder_Fluegelanbindung_dup1 with 3937 elements
+Writing boundary condition Zylinder_Mitte_dup1 with 256 elements
+Writing boundary condition Zylinder_Leitwerk_dup1 with 143 elements
+Writing boundary condition Zylinder_LW_Anbindung_dup1 with 1346 elements
+Writing boundary condition Fluegelvorderkanten with 1282 elements
+Writing boundary condition Fluegelschraegen with 6428 elements
+Writing boundary condition Fluegelhinterkanten with 1746 elements
+Writing boundary condition Fluegelvorderkanten_dup1 with 1282 elements
+Writing boundary condition Fluegelschraegen_dup1 with 6400 elements
+Writing boundary condition Fluegelhinterkanten_dup1 with 1728 elements
+Writing boundary condition Leitwerkvorderkanten with 23391 elements
+Writing boundary condition Leitwerkvorderkanten_dup1 with 23362 elements
+Writing boundary condition Fluegel_Strukt with 1496 elements
+Writing boundary condition Fluegel_Strukt_dup1 with 1870 elements
+Writing boundary condition Fluegel_3 with 15603 elements
+Writing boundary condition Leitwerk_3 with 63061 elements
+Writing boundary condition Nase_3 with 761 elements
+Writing boundary condition Ogive_3 with 448 elements
+Writing boundary condition Zylinder_Fluegel_3 with 1092 elements
+Writing boundary condition Zylinder_Heck_3 with 598 elements
+Writing boundary condition Heck_3 with 189 elements
+Writing boundary condition Zylinder_3 with 704 elements
+Writing boundary condition Zylinder_Fluegelanbindung_3 with 4157 elements
+Writing boundary condition Zylinder_Mitte_3 with 290 elements
+Writing boundary condition Zylinder_Leitwerk_3 with 182 elements
+Writing boundary condition Zylinder_LW_Anbindung_3 with 1802 elements
+Writing boundary condition Fluegel_dup1_3 with 15716 elements
+Writing boundary condition Leitwerk_dup1_3 with 25142 elements
+Writing boundary condition Nase_dup1_3 with 770 elements
+Writing boundary condition Ogive_dup1_3 with 364 elements
+Writing boundary condition Zylinder_Fluegel_dup1_3 with 810 elements
+Writing boundary condition Zylinder_Heck_dup1_3 with 598 elements
+Writing boundary condition Heck_dup1_3 with 189 elements
+Writing boundary condition Zylinder_dup1_3 with 572 elements
+Writing boundary condition Zylinder_Fluegelanbindung_dup1_3 with 3937 elements
+Writing boundary condition Zylinder_Mitte_dup1_3 with 256 elements
+Writing boundary condition Zylinder_Leitwerk_dup1_3 with 143 elements
+Writing boundary condition Zylinder_LW_Anbindung_dup1_3 with 1346 elements
+Writing boundary condition Fluegelvorderkanten_3 with 1282 elements
+Writing boundary condition Fluegelschraegen_3 with 6428 elements
+Writing boundary condition Fluegelhinterkanten_3 with 1746 elements
+Writing boundary condition Fluegelvorderkanten_dup1_3 with 1282 elements
+Writing boundary condition Fluegelschraegen_dup1_3 with 6400 elements
+Writing boundary condition Fluegelhinterkanten_dup1_3 with 1728 elements
+Writing boundary condition Leitwerkvorderkanten_3 with 23391 elements
+Writing boundary condition Leitwerkvorderkanten_dup1_3 with 23362 elements
+Writing boundary condition Fluegel_Strukt_3 with 1496 elements
+Writing boundary condition Fluegel_Strukt_dup1_3 with 1870 elements
