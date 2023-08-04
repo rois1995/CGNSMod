@@ -249,28 +249,7 @@ int main (int args, char **input){
         cout << file2write << endl;
         cg_open(file2write.c_str(), CG_MODE_WRITE, &index_file);
 
-        cgsize_t TotalSizes[3];
-        TotalSizes[0] = uniquePointsVec.size();
-        TotalSizes[1] = NewUniqueElements.size();
-        TotalSizes[2] = boundaries2Keep.size();
-        int one;
-        cg_base_write(index_file, "mesh", 3, 3, &one);
-        cg_zone_write(index_file, 1, "Zone 1", TotalSizes, Unstructured, &one);
 
-        int xid;
-        vector<double> TotalXCoords(uniquePointsVec.size(), 0.0);
-        vector<double> TotalYCoords(uniquePointsVec.size(), 0.0);
-        vector<double> TotalZCoords(uniquePointsVec.size(), 0.0);
-        for (long int i = 0; i < uniquePointsVec.size(); i++){
-            TotalXCoords[i] = uniquePointsVec[i].x;
-            TotalYCoords[i] = uniquePointsVec[i].y;
-            TotalZCoords[i] = uniquePointsVec[i].z;
-        }
-        cg_coord_write(index_file, 1, 1, RealDouble, "CoordinateX", TotalXCoords.data(), &xid);
-        cg_coord_write(index_file, 1, 1, RealDouble, "CoordinateY", TotalYCoords.data(), &xid);
-        cg_coord_write(index_file, 1, 1, RealDouble, "CoordinateZ", TotalZCoords.data(), &xid);
-
-        
         // Now I have to assign the elements such that they are divided by element type
         // I will declare them with the largest possible size and the nresize accordingly
         vector<vector<cgsize_t>> triaElements(NewUniqueElements.size());
@@ -325,6 +304,28 @@ int main (int args, char **input){
         cout << "Penta elements = " << pentaElements.size() << endl;
         cout << "Hexa elements = " << hexaElements.size() << endl;
 
+
+        cgsize_t TotalSizes[3];
+        TotalSizes[0] = uniquePointsVec.size();
+        TotalSizes[1] = nTetra+nPyra+nPenta+nHexa;
+        TotalSizes[2] = boundaries2Keep.size();
+        int one;
+        cg_base_write(index_file, "mesh", 3, 3, &one);
+        cg_zone_write(index_file, 1, "Zone 1", TotalSizes, Unstructured, &one);
+
+        int xid;
+        vector<double> TotalXCoords(uniquePointsVec.size(), 0.0);
+        vector<double> TotalYCoords(uniquePointsVec.size(), 0.0);
+        vector<double> TotalZCoords(uniquePointsVec.size(), 0.0);
+        for (long int i = 0; i < uniquePointsVec.size(); i++){
+            TotalXCoords[i] = uniquePointsVec[i].x;
+            TotalYCoords[i] = uniquePointsVec[i].y;
+            TotalZCoords[i] = uniquePointsVec[i].z;
+        }
+        cg_coord_write(index_file, 1, 1, RealDouble, "CoordinateX", TotalXCoords.data(), &xid);
+        cg_coord_write(index_file, 1, 1, RealDouble, "CoordinateY", TotalYCoords.data(), &xid);
+        cg_coord_write(index_file, 1, 1, RealDouble, "CoordinateZ", TotalZCoords.data(), &xid);
+
         // Now write the different sections
         int triaSection, quadSection, tetraSection, pyraSection, pentaSection, hexaSection, lastSection;
         triaSection = quadSection = tetraSection = pyraSection = pentaSection = hexaSection = lastSection = 0;
@@ -335,55 +336,105 @@ int main (int args, char **input){
             lastSection = triaSection;
             sectionName = "Tria";
             int S;
-            cg_section_partial_write(index_file, 1, 1, sectionName.c_str(), TRI_3, lastNofElements, lastNofElements+nTria, 0, &S);
-            cout << "Trias go from "  << lastNofElements << " to " << lastNofElements+nTria << endl;
-            lastNofElements += nTria+1;
+            const int nPoints = 3;
+            vector<cgsize_t> elem2Write(triaElements.size()*nPoints);
+            cgsize_t n = 0;
+            for (cgsize_t i = 0; i < triaElements.size(); i++){
+                for (cgsize_t j = 0; j < nPoints; j++){
+                    elem2Write[n++] = triaElements[i][j];
+                }
+            }
+            cg_section_write(index_file, 1, 1, sectionName.c_str(), TRI_3, lastNofElements, lastNofElements+nTria-1, 0, elem2Write.data(), &S);
+            cout << "Trias go from "  << lastNofElements << " to " << lastNofElements+nTria-1 << endl;
+            lastNofElements += nTria;
         }
 
         if(nQuad != 0){
             quadSection = lastSection++;
             sectionName = "Quads";
             int S;
-            cg_section_partial_write(index_file, 1, 1, sectionName.c_str(), QUAD_4, lastNofElements, lastNofElements+nQuad, 0, &S);
-            cout << "Quads go from "  << lastNofElements << " to " << lastNofElements+nQuad << endl;
-            lastNofElements += nQuad+1;
+            const int nPoints = 4;
+            vector<cgsize_t> elem2Write(quadElements.size()*nPoints);
+            cgsize_t n = 0;
+            for (cgsize_t i = 0; i < quadElements.size(); i++){
+                for (cgsize_t j = 0; j < nPoints; j++){
+                    elem2Write[n++] = quadElements[i][j];
+                }
+            }
+            cg_section_write(index_file, 1, 1, sectionName.c_str(), QUAD_4, lastNofElements, lastNofElements+nQuad-1, 0, elem2Write.data(), &S);
+            cout << "Quads go from "  << lastNofElements << " to " << lastNofElements+nQuad-1 << endl;
+            lastNofElements += nQuad;
         }
 
         if(nTetra != 0){
             tetraSection = lastSection++;
             sectionName = "Tetra";
             int S;
-            cg_section_partial_write(index_file, 1, 1, sectionName.c_str(), TETRA_4, lastNofElements, lastNofElements+nTetra, 0, &S);
-            cout << "Tetra go from "  << lastNofElements << " to " << lastNofElements+nTetra << endl;
-            lastNofElements += nTetra+1;
+            const int nPoints = 4;
+            vector<cgsize_t> elem2Write(tetraElements.size()*nPoints);
+            cgsize_t n = 0;
+            for (cgsize_t i = 0; i < tetraElements.size(); i++){
+                for (cgsize_t j = 0; j < nPoints; j++){
+                    elem2Write[n++] = tetraElements[i][j];
+                }
+            }
+            cg_section_write(index_file, 1, 1, sectionName.c_str(), TETRA_4, lastNofElements, lastNofElements+nTetra-1, 0, elem2Write.data(), &S);
+            cout << "Tetra go from "  << lastNofElements << " to " << lastNofElements+nTetra-1 << endl;
+            lastNofElements += nTetra;
         }
 
         if(nPyra != 0){
             pyraSection = lastSection++;
             sectionName = "Pyramids";
             int S;
-            cg_section_partial_write(index_file, 1, 1, sectionName.c_str(), PYRA_5, lastNofElements, lastNofElements+nPyra, 0, &S);
-            cout << "Pyra go from "  << lastNofElements << " to " << lastNofElements+nPyra << endl;
-            lastNofElements += nPyra+1;
+            const int nPoints = 5;
+            vector<cgsize_t> elem2Write(pyraElements.size()*nPoints);
+            cgsize_t n = 0;
+            for (cgsize_t i = 0; i < pyraElements.size(); i++){
+                for (cgsize_t j = 0; j < nPoints; j++){
+                    elem2Write[n++] = pyraElements[i][j];
+                }
+            }
+            cg_section_write(index_file, 1, 1, sectionName.c_str(), PYRA_5, lastNofElements, lastNofElements+nPyra-1, 0, elem2Write.data(), &S);
+            cout << "Pyra go from "  << lastNofElements << " to " << lastNofElements+nPyra-1 << endl;
+            lastNofElements += nPyra;
         }
 
         if(nPenta != 0){
             pentaSection = lastSection++;
             sectionName = "Penta";
             int S;
-            cg_section_partial_write(index_file, 1, 1, sectionName.c_str(), PENTA_6, lastNofElements, lastNofElements+nPenta, 0, &S);
-            cout << "Penta go from "  << lastNofElements << " to " << lastNofElements+nPenta << endl;
-            lastNofElements += nPenta+1;
+            const int nPoints = 6;
+            vector<cgsize_t> elem2Write(pentaElements.size()*nPoints);
+            cgsize_t n = 0;
+            for (cgsize_t i = 0; i < pentaElements.size(); i++){
+                for (cgsize_t j = 0; j < nPoints; j++){
+                    elem2Write[n++] = pentaElements[i][j];
+                }
+            }
+            cg_section_write(index_file, 1, 1, sectionName.c_str(), PENTA_6, lastNofElements, lastNofElements+nPenta-1, 0, elem2Write.data(), &S);
+            cout << "Penta go from "  << lastNofElements << " to " << lastNofElements+nPenta-1 << endl;
+            lastNofElements += nPenta;
         }
 
         if(nHexa != 0){
             hexaSection = lastSection++;
             sectionName = "Hexa";
             int S;
-            cg_section_partial_write(index_file, 1, 1, sectionName.c_str(), HEXA_8, lastNofElements, lastNofElements+nHexa, 0, &S);
-            cout << "Hexa go from "  << lastNofElements << " to " << lastNofElements+nHexa << endl;
-            lastNofElements += nHexa+1;
+            const int nPoints = 8;
+            vector<cgsize_t> elem2Write(hexaElements.size()*nPoints);
+            cgsize_t n = 0;
+            for (cgsize_t i = 0; i < hexaElements.size(); i++){
+                for (cgsize_t j = 0; j < nPoints; j++){
+                    elem2Write[n++] = hexaElements[i][j];
+                }
+            }
+            cg_section_write(index_file, 1, 1, sectionName.c_str(), HEXA_8, lastNofElements, lastNofElements+nHexa-1, 0, elem2Write.data(), &S);
+            cout << "Hexa go from "  << lastNofElements << " to " << lastNofElements+nHexa-1 << endl;
+            lastNofElements += nHexa;
         }
+
+        
         // for ( auto i = 0; i < NewUniqueElements.size(); i++){
         //     cout << NewUniqueElements[i].type << endl;
         // }

@@ -141,7 +141,7 @@ Saving elements for section 5...
 Done... 
 Original number of elements 17814
 New number of elements 17484
-0
+1
 Total number of points was 3489
 Non-duplicated number of nodes is 3298
 /home/rausa/Software/lib/CGNSMod/Meshes/provaTria_ConQuads_SingleZone.cgns
@@ -152,7 +152,7 @@ Tetra elements = 14012
 Pyramid elements = 423
 Penta elements = 0
 Hexa elements = 0
-Trias go from 1 to 2925
-Quads go from 2926 to 3051
-Tetra go from 3052 to 17064
-Pyra go from 17065 to 17488
+Trias go from 1 to 2924
+Quads go from 2925 to 3049
+Tetra go from 3050 to 17061
+Pyra go from 17062 to 17484

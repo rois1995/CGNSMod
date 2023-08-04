@@ -432,7 +432,7 @@ void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vecto
     NewUniqueElements.resize(UniqueElements.size());
     std::unordered_set<Point3D> uniquePoints;
     // Dummy point map for points to be re-inserted
-    long int totalIndex = 0;
+    long int totalIndex = 1;
     auto it = UniqueElements.begin();
     // cycle on every element
     cout << totalIndex << endl;
@@ -464,9 +464,9 @@ void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vecto
                 Points[i] = totalIndex;
                 // If it has been found, then it has to be inserted among the unique points
                 pointHere.totalIndex = totalIndex;
-                totalIndex++;
                 uniquePoints.insert(pointHere);
-                uniquePointsVec[totalIndex] = pointHere;
+                uniquePointsVec[totalIndex-1] = pointHere;
+                totalIndex++;
 
             } else {
                 // This should always happen only if a duplicated node is found
@@ -485,7 +485,7 @@ void assignNewPointIndices(std::unordered_set<Point3DExt>& DummyMapPoints, vecto
         ++it;
     }
 
-    uniquePointsVec.resize(totalIndex);
+    uniquePointsVec.resize(totalIndex-1);
 
     cout << "Total number of points was "  << DummyMapPoints.size() << endl;
     cout << "Non-duplicated number of nodes is " << uniquePointsVec.size() << endl;
